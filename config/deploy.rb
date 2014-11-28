@@ -11,7 +11,7 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:app) do
       execute :systemctl, :restart, :unicorn
     end
   end
@@ -23,5 +23,7 @@ namespace :deploy do
       end
     end
   end
+
+  after :deploy, :restart
 
 end
